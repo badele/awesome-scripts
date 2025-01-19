@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+OUTPUT_INFOS="sender_infos.txt"
+OUTPUT_SUMMARIES="sender_summaries.txt"
+MAXLINES=50

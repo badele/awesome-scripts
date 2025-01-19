@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+. _commons_ 
+
+termgraph --delim ';' "$OUTPUT_SUMMARIES" | head -n${MAXLINES}

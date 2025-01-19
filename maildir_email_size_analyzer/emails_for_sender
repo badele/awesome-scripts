@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+. _commons_
+
+function usage() {
+    echo "Usage: $0 <sender>"
+    exit 1
+}
+
+if [ -z "$1" ]; then
+    usage
+fi
+
+grep "$1" "$OUTPUT_INFOS" | awk -F';' '{printf "%-20s;%-5s;%-40s\n", $1, int($2/1024/1024)"M", $3}' | column -t -s';'

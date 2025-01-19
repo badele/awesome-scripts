@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+function usage() {
+    echo "Usage: $0 <maildir>"
+    exit 1
+}
+
+. _commons_
+
+CURRENT=0
+
+if [ -z "$1" ]; then
+    usage
+fi
+
+# Calcul de la taile des mails
+mlist "$1" | mseq -S
+
+ALL_IDS=$(mseq)
+TOTAL=$(echo "$ALL_IDS" | wc -l)
+
+# echo -e "From;Size;Id" > "${OUTPUT_INFOS}"
+echo "" >"$OUTPUT_INFOS"
+mseq | while read -r ID; do
+    CURRENT=$((CURRENT + 1))
+    PERCENT=$((CURRENT * 100 / TOTAL))
+    echo -ne "Progress: $PERCENT% ($CURRENT/$TOTAL)\r"
+
+    FROM=$(echo "$ID" | maddr -a -h "from")
+    SUBJECT=$(mscan -f '%s' "$ID" | sed 's/;/ /g')
+    SIZE=$(stat --format=%s "$ID")
+
+    echo -e "${FROM};${SIZE};'${SUBJECT}';${ID}" >>"$OUTPUT_INFOS"
+done
+sort -t';' -rnk2 -o "$OUTPUT_INFOS" "$OUTPUT_INFOS"
+
+# Calcule la taille totale pour un expéditeur
+awk -F ';' '{
+    arr[$1]+=$2
+   }
+   END {
+     for (key in arr) printf("%s;%s\n", key, arr[key])
+   }' "$OUTPUT_INFOS" |
+    sort -t';' -rnk2 | grep -vE "^;" >"$OUTPUT_SUMMARIES"
