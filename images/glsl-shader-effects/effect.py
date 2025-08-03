@@ -76,6 +76,14 @@ def delete_image(image_path, *effects):
     return output_image_name
 
 
+def parse_effects(effects_str):
+    """Parse effects string in format '30,1' or '30 1' and return list of integers"""
+    if ',' in effects_str:
+        return [int(x.strip()) for x in effects_str.split(',')]
+    else:
+        return [int(x) for x in effects_str.split()]
+
+
 def effects_path(*effects):
     global shaders
     # Trouver les noms des constantes correspondantes aux numéros
@@ -101,21 +109,19 @@ def main():
     apply_parser = subparsers.add_parser("apply", help="Apply effects to an image")
     apply_parser.add_argument(
         "effects",
-        type=int,
-        nargs="+",
-        help="List of effects (1 2 3), see value witch ./effect.py list",
+        type=str,
+        help="List of effects (30,1 or 30 1), see value witch ./effect.py list",
     )
     apply_parser.add_argument("image", type=str, help="Image filename")
 
     # Delete command
-    apply_parser = subparsers.add_parser("delete", help="Delete image with effects")
-    apply_parser.add_argument(
+    delete_parser = subparsers.add_parser("delete", help="Delete image with effects")
+    delete_parser.add_argument(
         "effects",
-        type=int,
-        nargs="+",
-        help="List of effects (1 2 3), see value witch ./effect.py list",
+        type=str,
+        help="List of effects (30,1 or 30 1), see value witch ./effect.py list",
     )
-    apply_parser.add_argument("image", type=str, help="Image filename")
+    delete_parser.add_argument("image", type=str, help="Image filename")
 
     # Parse les arguments
     args = parser.parse_args()
@@ -125,9 +131,11 @@ def main():
     if args.command == "list":
         list_effects()
     elif args.command == "apply":
-        apply_effect(args.image, *args.effects)
+        effects = parse_effects(args.effects)
+        apply_effect(args.image, *effects)
     elif args.command == "delete":
-        delete_image(args.image, *args.effects)
+        effects = parse_effects(args.effects)
+        delete_image(args.image, *effects)
     else:
         parser.print_help()
 

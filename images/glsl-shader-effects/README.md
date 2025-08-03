@@ -15,9 +15,11 @@ nix develop or nix run "github:badele/awesome-scripts?dir=images/glsl-shader-eff
 ./effect.py list 
 
 # Apply shaders 30 and 1 (VGA_PALETTE and CRT)
-./effect.py apply 30 1 <imagename>
-or
-find <path> -type f \( -iname "*.png" -o -iname "*.jpeg" -o -iname "*.jpg" \) -not -name "*_ega_palette.*" | xargs -I {} ./effect.py apply 30 1 {}
+./effect.py apply 30,1 <imagename>
+# or with spaces (requires quotes)
+./effect.py apply "30 1" <imagename>
+# or with find command
+find <path> -type f \( -iname "*.png" -o -iname "*.jpeg" -o -iname "*.jpg" \) -not -name "*_ega_palette.*" | xargs -I {} ./effect.py apply 30,1 {}
 ```
 
 ## Sample result
