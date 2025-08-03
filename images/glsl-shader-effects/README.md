@@ -8,7 +8,8 @@ When you apply several shaders, the name of the file is created in function of
 the shaders used.
 
 ```shell
-nix develop
+nix develop or nix run "github:badele/awesome-scripts?dir=images/glsl-shader-effects"
+
 
 # List all available shaders
 ./effect.py list 

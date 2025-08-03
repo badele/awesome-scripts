@@ -8,7 +8,7 @@ buildPythonPackage rec {
     owner = "badele";
     repo = "fork-Image-Processing";
     rev = "main";
-    sha256 = "sha256-MUyCEc6ygFWoEkYRJZg6k2wG7mZ9JC9Q2DuZTs1kPnQ=";
+    sha256 = "sha256-1a/il1R1eMmwcjmSOUP8f23nBkP90IZoKhxUPo+fPrk=";
   };
 
   propagatedBuildInputs = with python311Packages; [
