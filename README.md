@@ -7,6 +7,7 @@ My awesome scripts
 ### Images
 
 - [GLSL shader effects](./images/glsl-shader-effects/README.md)
+- [Poster Generator](./images/poster-generator/README.md)
 
 ### Mail
 
