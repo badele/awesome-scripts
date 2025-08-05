@@ -30,9 +30,9 @@
         installPhase = ''
           mkdir -p $out/bin
 
-          cp effect.py $out/bin/
+          cp glsl-shader-effects.py $out/bin/
 
-          chmod +x $out/bin/effect.py
+          chmod +x $out/bin/glsl-shader-effects.py
         '';
 
         meta = {
@@ -47,7 +47,7 @@
       # nix run
       apps.${system}.default = {
         type = "app";
-        program = "${glsl-shader-effects}/bin/effect.py";
+        program = "${glsl-shader-effects}/bin/glsl-shader-effects.py";
       };
 
       # nix develop

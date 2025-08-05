@@ -110,7 +110,7 @@ def main():
     apply_parser.add_argument(
         "effects",
         type=str,
-        help="List of effects (30,1 or 30 1), see value witch ./effect.py list",
+        help="List of effects (30,1 or 30 1), see value witch ./glsl-shader-effects.py list",
     )
     apply_parser.add_argument("image", type=str, help="Image filename")
 
@@ -119,7 +119,7 @@ def main():
     delete_parser.add_argument(
         "effects",
         type=str,
-        help="List of effects (30,1 or 30 1), see value witch ./effect.py list",
+        help="List of effects (30,1 or 30 1), see value witch ./glsl-shader-effects.py list",
     )
     delete_parser.add_argument("image", type=str, help="Image filename")
 
