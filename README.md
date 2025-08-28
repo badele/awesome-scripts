@@ -8,6 +8,7 @@ My awesome scripts
 
 - [GLSL shader effects](./images/glsl-shader-effects/README.md)
 - [Lospec palette downloader](./images/download-lospec-palette/README.md)
+- [Tones generator](./images/tones-generator/README.md)
 
 ### Mail
 
